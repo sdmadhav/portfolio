@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madhav Deshatwad | Applied AI & LLM Systems Engineer</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            obsidian: '#07090E',
+            surface: '#0D1117',
+            card: '#111622',
+            borderSubtle: 'rgba(255, 255, 255, 0.08)',
+            accentBlue: '#38BDF8',
+            accentIndigo: '#818CF8',
+            accentEmerald: '#34D399',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #07090E;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Vercel-style engineering grid background */
+    .bg-grid-pattern {
+      background-size: 44px 44px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 65%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 65%, transparent 100%);
+    }
+
+    /* Glassmorphism card styling */
+    .glass-card {
+      background: rgba(17, 22, 34, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.32);
+      box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.65), 0 0 24px -8px rgba(56, 189, 248, 0.14);
+    }
+
+    /* Scroll reveal transitions */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07090E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sky-500/30 selection:text-sky-200">
+
+  <!-- Ambient Top Glow & Grid -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute inset-0 bg-grid-pattern"></div>
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[780px] h-[380px] rounded-full bg-sky-500/10 blur-[120px]"></div>
+    <div class="absolute top-36 right-1/4 w-[420px] h-[280px] rounded-full bg-indigo-500/10 blur-[110px]"></div>
+  </div>
+
+  <!-- Sticky Glass Navbar -->
+  <header class="sticky top-0 z-40 border-b border-white/[0.07] bg-[#07090E]/80 backdrop-blur-xl">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center text-slate-950 font-mono font-bold text-sm shadow-md shadow-sky-500/20">
+          MD
+        </div>
+        <span class="font-semibold tracking-tight text-slate-100 group-hover:text-sky-400 transition-colors">
+          madhav<span class="text-sky-400">.ai</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-400" id="desktop-nav">
+        <a href="#workexperience" data-section="workexperience" class="nav-link px-3.5 py-2 rounded-lg hover:text-slate-100 hover:bg-white/[0.04] transition-all">Experience</a>
+        <a href="#projects" data-section="projects" class="nav-link px-3.5 py-2 rounded-lg hover:text-slate-100 hover:bg-white/[0.04] transition-all">Systems & Projects</a>
+        <a href="#skills" data-section="skills" class="nav-link px-3.5 py-2 rounded-lg hover:text-slate-100 hover:bg-white/[0.04] transition-all">Stack</a>
+        <a href="#education" data-section="education" class="nav-link px-3.5 py-2 rounded-lg hover:text-slate-100 hover:bg-white/[0.04] transition-all">Education & Honors</a>
+        <a href="#contact" data-section="contact" class="nav-link px-3.5 py-2 rounded-lg hover:text-slate-100 hover:bg-white/[0.04] transition-all">Contact</a>
+      </nav>
+
+      <div class="hidden sm:flex items-center gap-2.5">
+        <button onclick="copyText('sdmadhav13@gmail.com', 'Email copied to clipboard')" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/10 transition-all">
+          <i data-lucide="copy" class="w-3.5 h-3.5 text-sky-400"></i>
+          sdmadhav13@gmail.com
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2 rounded-lg text-slate-300 hover:bg-white/10">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/[0.07] bg-[#0B0F17] px-4 py-3 space-y-1">
+      <a href="#workexperience" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-white/5">Experience</a>
+      <a href="#projects" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-white/5">Systems & Projects</a>
+      <a href="#skills" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-white/5">Technical Stack</a>
+      <a href="#education" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-white/5">Education & Honors</a>
+      <a href="#contact" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-white/5">Contact</a>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+
+    <!-- HERO SECTION -->
+    <section class="pt-16 pb-20 sm:pt-24 sm:pb-28">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-mono mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Open to Applied AI / LLM / ML Engineer Roles
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+        Madhav Shivaji Deshatwad
+      </h1>
+
+      <p class="mt-3 text-xl sm:text-2xl font-semibold bg-gradient-to-r from-sky-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+        Applied AI & LLM Systems Engineer &bull; Data Scientist
+      </p>
+
+      <p class="mt-5 max-w-2xl text-base sm:text-lg text-slate-400 leading-relaxed">
+        Architecting low-latency RAG pipelines, verifiable claim-checking NLP systems, and multimodal deep learning architectures. 
+        <span class="text-slate-200 font-medium">M.Tech in Data Science (IIT Palakkad)</span> &amp; <span class="text-slate-200 font-medium">B.Tech in CSE (IIT Ropar)</span>.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition-all shadow-lg shadow-sky-500/20">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+          Explore AI Systems
+        </a>
+        <a href="#workexperience" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.11] text-slate-100 border border-white/10 font-medium text-sm transition-all">
+          <i data-lucide="briefcase" class="w-4 h-4 text-sky-400"></i>
+          Work & Research
+        </a>
+        <button onclick="copyText('+91-8605848123', 'Phone number copied')" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] text-slate-300 border border-white/10 font-mono text-xs transition-all">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-indigo-400"></i>
+          +91-8605848123
+        </button>
+      </div>
+
+      <!-- Verified Metrics Bar -->
+      <div class="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-card rounded-2xl p-4 sm:p-5">
+          <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Inter-IIT Tech Meet</div>
+          <div class="mt-1.5 text-2xl sm:text-3xl font-bold text-white">2&times; Bronze</div>
+          <div class="mt-1 text-xs text-sky-400 font-medium">Rank 3/23 IITs (13.0 &amp; 14.0)</div>
+        </div>
+        <div class="glass-card rounded-2xl p-4 sm:p-5">
+          <div class="text-xs font-mono uppercase tracking-wider text-slate-400">M.Tech Data Science</div>
+          <div class="mt-1.5 text-2xl sm:text-3xl font-bold text-white">8.14 / 10</div>
+          <div class="mt-1 text-xs text-emerald-400 font-medium">IIT Palakkad (2024–2026)</div>
+        </div>
+        <div class="glass-card rounded-2xl p-4 sm:p-5">
+          <div class="text-xs font-mono uppercase tracking-wider text-slate-400">GATE 2024 (CS)</div>
+          <div class="mt-1.5 text-2xl sm:text-3xl font-bold text-white">94.43 %ile</div>
+          <div class="mt-1 text-xs text-indigo-400 font-medium">National Computer Science</div>
+        </div>
+        <div class="glass-card rounded-2xl p-4 sm:p-5">
+          <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Production API Scale</div>
+          <div class="mt-1.5 text-2xl sm:text-3xl font-bold text-white">10K+ / day</div>
+          <div class="mt-1 text-xs text-amber-400 font-medium">+40% DB Query Optimization</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK & RESEARCH EXPERIENCE SECTION (#workexperience) -->
+    <section id="workexperience" class="py-16 sm:py-24 border-t border-white/[0.07] reveal">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-sky-400">01 // Experience & Research</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-white tracking-tight">Work & Research Timeline</h2>
+        </div>
+        <p class="text-sm text-slate-400 max-w-md">
+          Production backend engineering, NLP/fact-checking research, and academic mentorship across IIT Palakkad and industry roles.
+        </p>
+      </div>
+
+      <!-- Vertical Timeline Container -->
+      <div class="relative border-l border-slate-800 ml-3 sm:ml-6 space-y-8">
+
+        <!-- Item 1: M.Tech Thesis Research -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[7px] top-6 w-3.5 h-3.5 rounded-full bg-sky-400 ring-4 ring-[#07090E]"></span>
+          <div class="glass-card rounded-2xl p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 mb-1">
+                  <span>Aug 2025 – Nov 2025</span>
+                  <span>&bull;</span>
+                  <span>IIT Palakkad</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">M.Tech Thesis Researcher — Numerical Claim Verification</h3>
+                <p class="text-sm text-slate-400 mt-0.5">Advisor: Dr. Koninika Pal &bull; Automated Fact-Checking &amp; Retrieval</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-sky-500/10 text-sky-300 border border-sky-500/20">
+                +30% Conflicting-Claim F1
+              </span>
+            </div>
+            <ul class="mt-4 space-y-2.5 text-sm text-slate-300 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                <span>Engineered an automated fact-checking pipeline targeting numerical comparison claims, addressing conflicting (partially true) claims that previously suffered 48% lower F1 scores.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                <span>Implemented <strong>T5-based WH-question generation</strong> paired with <strong>Maximal Marginal Relevance (MMR)</strong> selection (&lambda; = 0.7 relevance, 0.3 diversity) to retrieve complementary multi-facet evidence.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-sky-400 shrink-0 mt-0.5"></i>
+                <span>Achieved a <strong>30% relative F1 gain (0.30 &rarr; 0.39)</strong> on conflicting claims and a <strong>6% macro-F1 improvement (0.47 &rarr; 0.50)</strong> across 1,049 comparison claims on the QuanTemp benchmark.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">T5</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">MMR Retrieval</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">QuanTemp</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">PyTorch</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Teaching Assistant -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[7px] top-6 w-3.5 h-3.5 rounded-full bg-indigo-400 ring-4 ring-[#07090E]"></span>
+          <div class="glass-card rounded-2xl p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div class="inline-flex items-center gap-2 text-xs font-mono text-indigo-400 mb-1">
+                  <span>Jan 2025 – Present</span>
+                  <span>&bull;</span>
+                  <span>IIT Palakkad</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">Graduate Teaching Assistant — Data Analysis &amp; AI Ethics</h3>
+                <p class="text-sm text-slate-400 mt-0.5">Courses: Data Analysis (Aug–Nov 2025) &amp; AI Ethics (Jan–May 2025)</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                100+ Students Mentored
+              </span>
+            </div>
+            <ul class="mt-4 space-y-2.5 text-sm text-slate-300 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                <span>Led hands-on technical labs for 100+ students in statistical inference, Python programming, pandas data pipelines, scikit-learn modeling, and visualization.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-indigo-400 shrink-0 mt-0.5"></i>
+                <span>Authored graded assignments covering exploratory data analysis, hypothesis testing, regression modeling, and algorithmic fairness/bias auditing in ML systems.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">Statistical Modeling</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">Scikit-Learn</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">AI Fairness &amp; Bias</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Python Developer at Education4OL -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[7px] top-6 w-3.5 h-3.5 rounded-full bg-emerald-400 ring-4 ring-[#07090E]"></span>
+          <div class="glass-card rounded-2xl p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 mb-1">
+                  <span>May 2022 – Jul 2022</span>
+                  <span>&bull;</span>
+                  <span>Industry Internship</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">Python Backend Developer — Education4OL</h3>
+                <p class="text-sm text-slate-400 mt-0.5">REST API Engineering &amp; Database Performance</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                10K+ Daily Requests
+              </span>
+            </div>
+            <ul class="mt-4 space-y-2.5 text-sm text-slate-300 leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span>Architected and deployed production REST APIs using <strong>Flask</strong> and <strong>PostgreSQL</strong> handling <strong>10,000+ daily requests</strong>.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                <span>Automated analytical reporting workflows via Python scripting, cutting manual operational effort by <strong>80%</strong>, and tuned PostgreSQL queries for a <strong>40% latency reduction</strong>.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">Python</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">Flask</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">PostgreSQL</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.07]">REST APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Coding Educator at Bright Champs -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[7px] top-6 w-3.5 h-3.5 rounded-full bg-slate-500 ring-4 ring-[#07090E]"></span>
+          <div class="glass-card rounded-2xl p-6 sm:p-7">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-400 mb-1">
+                  <span>Jun 2022 – Aug 2022</span>
+                  <span>&bull;</span>
+                  <span>Remote (Global)</span>
+                </div>
+                <h3 class="text-xl font-bold text-white">Coding Educator — Bright Champs</h3>
+                <p class="text-sm text-slate-400 mt-0.5">200+ Live Sessions Across 15 Countries</p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-white/[0.05] text-slate-300 border border-white/10">
+                +65% Engagement
+              </span>
+            </div>
+            <p class="mt-3 text-sm text-slate-300 leading-relaxed">
+              Delivered 200+ live programming sessions to students across 15 countries and designed a gamified Python/logic curriculum that increased student engagement by 65%.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS & PROOF-OF-WORK SECTION (#projects) -->
+    <section id="projects" class="py-16 sm:py-24 border-t border-white/[0.07] reveal">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-5">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-sky-400">02 // Proof of Work</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-white tracking-tight">AI Systems &amp; Benchmarks</h2>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2" id="project-filters">
+          <button data-filter="all" class="filter-btn active px-3.5 py-2 rounded-xl text-xs font-mono font-medium bg-sky-500 text-slate-950 transition-all">
+            All Systems (4)
+          </button>
+          <button data-filter="llm" class="filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-medium bg-white/[0.05] text-slate-300 hover:bg-white/[0.1] border border-white/10 transition-all">
+            LLM &amp; RAG
+          </button>
+          <button data-filter="multimodal" class="filter-btn px-3.5 py-2 rounded-xl text-xs font-mono font-medium bg-white/[0.05] text-slate-300 hover:bg-white/[0.1] border border-white/10 transition-all">
+            Multimodal DL
+          </button>
+        </div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+
+        <!-- Project 1 -->
+        <article class="project-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between" data-category="llm">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-amber-500/15 text-amber-300 border border-amber-500/25">
+                Inter-IIT 13.0 Bronze (Rank 3/23)
+              </span>
+              <span class="text-xs font-mono text-slate-400">Dec 2024</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Causal Rationale Extraction in Business Conversations</h3>
+            <p class="mt-2.5 text-sm text-slate-300 leading-relaxed">
+              Led technical architecture for Observe.ai's challenge across 19,621 multi-domain conversations. Combined fine-tuned DistilBERT (94.4% intent accuracy), zero-shot BERT attention span extraction, and Llama-3-8B structured generation with sub-20s latency.
+            </p>
+            <div class="mt-4 grid grid-cols-3 gap-2 p-3 rounded-xl bg-black/30 border border-white/[0.06] text-center">
+              <div>
+                <div class="text-sm font-bold text-white font-mono">94.4%</div>
+                <div class="text-[11px] text-slate-400">35-Intent Acc</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-sky-400 font-mono">16.69s</div>
+                <div class="text-[11px] text-slate-400">Avg Latency</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-emerald-400 font-mono">95.0%</div>
+                <div class="text-[11px] text-slate-400">Turn Retention</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/[0.07] flex items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">Llama-3-8B</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">FAISS+BM25</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">Docker</span>
+            </div>
+            <button onclick="openProjectModal(0)" class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-sky-400 hover:text-sky-300 shrink-0">
+              Architecture <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between" data-category="llm">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-sky-500/15 text-sky-300 border border-sky-500/25">
+                M.Tech Thesis &bull; QuanTemp
+              </span>
+              <span class="text-xs font-mono text-slate-400">Aug–Nov 2025</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Question Diversification for Numerical Claim Verification</h3>
+            <p class="mt-2.5 text-sm text-slate-300 leading-relaxed">
+              Automated fact-checking engine resolving conflicting numerical comparison claims using T5 WH-question decomposition, Maximal Marginal Relevance (MMR) selection, and multi-granularity evidence fusion.
+            </p>
+            <div class="mt-4 grid grid-cols-3 gap-2 p-3 rounded-xl bg-black/30 border border-white/[0.06] text-center">
+              <div>
+                <div class="text-sm font-bold text-emerald-400 font-mono">+30%</div>
+                <div class="text-[11px] text-slate-400">Conflict F1</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-sky-400 font-mono">+6.0%</div>
+                <div class="text-[11px] text-slate-400">Macro-F1</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white font-mono">1,049</div>
+                <div class="text-[11px] text-slate-400">Claims Eval</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/[0.07] flex items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">T5</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">MMR (&lambda;=0.7)</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">PyTorch</span>
+            </div>
+            <button onclick="openProjectModal(1)" class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-sky-400 hover:text-sky-300 shrink-0">
+              Architecture <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between" data-category="multimodal">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-indigo-500/15 text-indigo-300 border border-indigo-500/25">
+                Audio + Video + Text Fusion
+              </span>
+              <span class="text-xs font-mono text-slate-400">Mar–Apr 2025</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Multimodal 7-Class Emotion Recognition System</h3>
+            <p class="mt-2.5 text-sm text-slate-300 leading-relaxed">
+              End-to-end multimodal deep learning pipeline fusing ResNet-18 spectrogram CNNs, attention-augmented CRNN temporal audio encoders, and frame-level facial expression models via calibrated late fusion.
+            </p>
+            <div class="mt-4 grid grid-cols-3 gap-2 p-3 rounded-xl bg-black/30 border border-white/[0.06] text-center">
+              <div>
+                <div class="text-sm font-bold text-white font-mono">3 Modal</div>
+                <div class="text-[11px] text-slate-400">A / V / Text</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-indigo-400 font-mono">7-Class</div>
+                <div class="text-[11px] text-slate-400">Affective Tax.</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-emerald-400 font-mono">Late Fusion</div>
+                <div class="text-[11px] text-slate-400">Ensemble</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/[0.07] flex items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">ResNet-18</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">CRNN</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">PyTorch/TF</span>
+            </div>
+            <button onclick="openProjectModal(2)" class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-sky-400 hover:text-sky-300 shrink-0">
+              Architecture <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 4: Active Build Blueprint -->
+        <article class="project-card glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between border-dashed border-sky-500/30" data-category="llm">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">
+                Active Production Build
+              </span>
+              <span class="text-xs font-mono text-slate-400">In Development</span>
+            </div>
+            <h3 class="text-xl font-bold text-white">Self-Corrective Agentic Financial RAG Engine</h3>
+            <p class="mt-2.5 text-sm text-slate-300 leading-relaxed">
+              Extending numerical claim verification into a cyclic LangGraph agent with RRF hybrid search, cross-encoder reranking, Redis semantic caching, and automated Ragas faithfulness regression gates.
+            </p>
+            <div class="mt-4 grid grid-cols-3 gap-2 p-3 rounded-xl bg-black/30 border border-white/[0.06] text-center">
+              <div>
+                <div class="text-sm font-bold text-sky-400 font-mono">LangGraph</div>
+                <div class="text-[11px] text-slate-400">Cyclic State</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-indigo-400 font-mono">2-Stage</div>
+                <div class="text-[11px] text-slate-400">RRF + Rerank</div>
+              </div>
+              <div>
+                <div class="text-sm font-bold text-emerald-400 font-mono">Ragas</div>
+                <div class="text-[11px] text-slate-400">Eval Suite</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/[0.07] flex items-center justify-between gap-3">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">FastAPI</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">vLLM</span>
+              <span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/[0.05] text-slate-300">Ragas</span>
+            </div>
+            <button onclick="openProjectModal(3)" class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-sky-400 hover:text-sky-300 shrink-0">
+              Blueprint <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- TECHNICAL STACK SECTION (#skills) -->
+    <section id="skills" class="py-16 sm:py-24 border-t border-white/[0.07] reveal">
+      <span class="text-xs font-mono uppercase tracking-widest text-sky-400">03 // Core Competencies</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-white tracking-tight mb-10">Technical Stack</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="glass-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-4">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3">NLP &amp; LLMs</h3>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Llama-3</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">BERT / DistilBERT</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">T5 / BART</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">GPT</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Sentence-BERT</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Fine-Tuning</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4">
+            <i data-lucide="search" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3">RAG &amp; Retrieval</h3>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Hybrid Retrieval</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">FAISS</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">BM25</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Dense Passage Retrieval</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Semantic Search</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3">ML / DL Frameworks</h3>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">PyTorch</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Hugging Face</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">LangChain</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">TensorFlow</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Scikit-Learn</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Keras</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4">
+            <i data-lucide="server" class="w-5 h-5"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-3">MLOps &amp; Backend</h3>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Python</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">FastAPI / Flask</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">Docker</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">PostgreSQL / SQL</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">MongoDB</span>
+            <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.04] text-slate-300 border border-white/[0.06]">W&amp;B / HF Spaces</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & HONORS SECTION (#education) -->
+    <section id="education" class="py-16 sm:py-24 border-t border-white/[0.07] reveal">
+      <span class="text-xs font-mono uppercase tracking-widest text-sky-400">04 // Academic Pedigree</span>
+      <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-white tracking-tight mb-10">Education &amp; National Honors</h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Degrees -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono text-sky-400">Aug 2024 – May 2026</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">
+                CGPA: 8.14 / 10
+              </span>
+            </div>
+            <h3 class="mt-2 text-lg font-bold text-white">Indian Institute of Technology, Palakkad</h3>
+            <p class="text-sm text-slate-300 mt-1">M.Tech in Data Science</p>
+            <p class="text-xs text-slate-400 mt-2">Thesis: Question Diversification for Numerical Claim Verification &bull; Graduate Teaching Assistant</p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-mono text-indigo-400">Aug 2019 – Dec 2023</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.05] text-slate-300 border border-white/10">
+                B.Tech CSE
+              </span>
+            </div>
+            <h3 class="mt-2 text-lg font-bold text-white">Indian Institute of Technology, Ropar</h3>
+            <p class="text-sm text-slate-300 mt-1">B.Tech in Computer Science and Engineering</p>
+            <p class="text-xs text-slate-400 mt-2">Core CS Foundations: Algorithms, Operating Systems, Databases, Computer Networks</p>
+          </div>
+        </div>
+
+        <!-- Distinctions -->
+        <div class="lg:col-span-6 glass-card rounded-2xl p-6 sm:p-7">
+          <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+            <i data-lucide="award" class="w-5 h-5 text-amber-400"></i>
+            Competitive &amp; Academic Distinctions
+          </h3>
+          <ul class="space-y-3.5 text-sm">
+            <li class="flex items-start justify-between gap-3 pb-3 border-b border-white/[0.06]">
+              <div>
+                <div class="font-semibold text-slate-100">Inter-IIT Tech Meet 14.0 (2025) — Bronze Medal</div>
+                <div class="text-xs text-slate-400">Team Lead, ML Challenge &bull; Ranked 3rd among 23 IITs</div>
+              </div>
+              <span class="font-mono text-xs text-amber-300 shrink-0">Rank 3/23</span>
+            </li>
+            <li class="flex items-start justify-between gap-3 pb-3 border-b border-white/[0.06]">
+              <div>
+                <div class="font-semibold text-slate-100">Inter-IIT Tech Meet 13.0 (2024) — Bronze Medal</div>
+                <div class="text-xs text-slate-400">Team Lead, Observe.ai Conversational AI Challenge</div>
+              </div>
+              <span class="font-mono text-xs text-amber-300 shrink-0">Rank 3/23</span>
+            </li>
+            <li class="flex items-start justify-between gap-3 pb-3 border-b border-white/[0.06]">
+              <div>
+                <div class="font-semibold text-slate-100">GATE 2024 — Computer Science</div>
+                <div class="text-xs text-slate-400">Graduate Aptitude Test in Engineering</div>
+              </div>
+              <span class="font-mono text-xs text-sky-400 shrink-0">94.43 %ile</span>
+            </li>
+            <li class="flex items-start justify-between gap-3 pb-3 border-b border-white/[0.06]">
+              <div>
+                <div class="font-semibold text-slate-100">JEE Advanced 2019 &amp; NEET 2019</div>
+                <div class="text-xs text-slate-400">All-India Category Ranks in National Entrance Exams</div>
+              </div>
+              <span class="font-mono text-xs text-indigo-400 shrink-0">AIR 323 / 140</span>
+            </li>
+            <li class="flex items-start justify-between gap-3">
+              <div>
+                <div class="font-semibold text-slate-100">INSPIRE Scholarship</div>
+                <div class="text-xs text-slate-400">Dept. of Science &amp; Technology, Govt. of India</div>
+              </div>
+              <span class="font-mono text-xs text-emerald-400 shrink-0">Top 1%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT FOOTER (#contact) -->
+    <footer id="contact" class="py-16 sm:py-24 border-t border-white/[0.07] reveal">
+      <div class="glass-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-sky-500/[0.07] via-transparent to-indigo-500/[0.07] pointer-events-none"></div>
+        <span class="text-xs font-mono uppercase tracking-widest text-sky-400">05 // Direct Connect</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-white tracking-tight">
+          Hiring for Applied AI, LLM, or ML Systems?
+        </h2>
+        <p class="mt-3 max-w-xl mx-auto text-sm sm:text-base text-slate-400">
+          Available for full-time Applied AI / ML Engineer roles. Reach out directly via email or phone for architecture walkthroughs and technical discussions.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a href="mailto:sdmadhav13@gmail.com" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition-all shadow-lg shadow-sky-500/20">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            sdmadhav13@gmail.com
+          </a>
+          <button onclick="copyText('sdmadhav13@gmail.com', 'Email copied to clipboard')" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.11] text-slate-100 border border-white/10 font-mono text-xs transition-all">
+            <i data-lucide="copy" class="w-4 h-4 text-sky-400"></i>
+            Copy Email
+          </button>
+          <button onclick="copyText('+91-8605848123', 'Phone number copied')" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.11] text-slate-100 border border-white/10 font-mono text-xs transition-all">
+            <i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i>
+            +91-8605848123
+          </button>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-white/[0.07] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
+          <span>&copy; 2026 Madhav Shivaji Deshatwad</span>
+          <span>IIT Palakkad (M.Tech DS) &bull; IIT Ropar (B.Tech CSE)</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ARCHITECTURE INSPECTOR MODAL -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-md">
+    <div class="bg-[#0D1117] border border-white/15 rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeProjectModal()" aria-label="Close modal" class="absolute top-5 right-5 p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <span id="modal-badge" class="px-2.5 py-1 rounded-md text-xs font-mono bg-sky-500/15 text-sky-300 border border-sky-500/25"></span>
+      <h3 id="modal-title" class="mt-3 text-2xl font-bold text-white"></h3>
+      <p id="modal-subtitle" class="mt-1 text-sm text-slate-400"></p>
+
+      <div class="mt-6">
+        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">System Pipeline Diagram</div>
+        <pre id="modal-diagram" class="p-4 rounded-xl bg-[#07090E] border border-white/[0.08] text-xs font-mono text-sky-300 overflow-x-auto leading-relaxed"></pre>
+      </div>
+
+      <div class="mt-6">
+        <div class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Engineering Highlights &amp; Benchmarks</div>
+        <ul id="modal-bullets" class="space-y-2 text-sm text-slate-300"></ul>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-white/[0.08] flex flex-wrap gap-2" id="modal-tags"></div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 border border-sky-500/40 text-slate-100 text-xs font-mono shadow-xl">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-msg">Copied!</span>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Project Architecture Modal Data (100% grounded in Madhav's verified projects + active blueprint)
+    const projectDetails = [
+      {
+        badge: "Inter-IIT Tech Meet 13.0 • Bronze Medal (Rank 3/23)",
+        title: "Causal Rationale Extraction in Business Conversations",
+        subtitle: "End-to-End Multi-Turn Conversational NLP & LLM System (19,621 Conversations)",
+        diagram: `[Multi-Turn Conversation] ──► [Fine-Tuned DistilBERT Classifier (35 Intents | 94.4% Acc)]
+                                        │
+                                        ▼
+[Zero-Shot BERT Attention Span Extraction] + [Hybrid Retrieval (FAISS + BM25 + Sentence-BERT)]
+                                        │
+                                        ▼
+[Llama-3-8B Structured Rationale Generator + Multi-Turn Context Tracker (95% Retention)]
+                                        │
+                                        ▼
+           [Containerized Docker Inference Pipeline | 16.69s Avg Latency]`,
+        bullets: [
+          "Led technical architecture as Team Lead for Observe.ai's challenge across 19,621 multi-domain customer service transcripts.",
+          "Achieved 94.4% classification accuracy across 35 business intents using fine-tuned DistilBERT.",
+          "Pioneered zero-shot causal span extraction directly from BERT attention distributions without additional span-level supervision.",
+          "Integrated Llama-3-8B for structured causal explanations while maintaining 95% intent preservation across multi-turn follow-ups at 16.69s average end-to-end latency."
+        ],
+        tags: ["PyTorch", "DistilBERT", "Llama-3-8B", "Sentence-BERT", "FAISS", "BM25", "Docker", "Python"]
+      },
+      {
+        badge: "M.Tech Thesis • IIT Palakkad (Dr. Koninika Pal)",
+        title: "Question Diversification for Numerical Claim Verification",
+        subtitle: "Automated Fact-Checking over 1,049 Numerical Comparison Claims (QuanTemp Benchmark)",
+        diagram: `[Numerical Comparison Claim]
+        │
+        ├──► [T5 WH-Question Generator] ──► [MMR Selector (λ=0.7 Relevance, 0.3 Diversity)]
+        ├──► [Entity-Specific Query Generator]
+        └──► [Baseline Yes/No Question Generator]
+                    │
+                    ▼
+     [Complementary Evidence Fusion & Retrieval] ──► [Veracity Classifier (+30% Conflicting F1)]`,
+        bullets: [
+          "Targeted conflicting (partially true) numerical claims, which suffered 48% lower F1 scores than standard claims in prior fact-checking literature.",
+          "Balanced relevance (0.7) and diversity (0.3) via Maximal Marginal Relevance (MMR) over T5-generated WH-questions to uncover distinct claim facets.",
+          "Improved conflicting-claim F1 by 30% relative (0.30 → 0.39) and overall macro-F1 by 6% (0.47 → 0.50) across 1,049 QuanTemp comparison claims."
+        ],
+        tags: ["T5", "MMR Selection", "Hybrid Retrieval", "PyTorch", "Hugging Face", "QuanTemp", "Python"]
+      },
+      {
+        badge: "Multimodal Deep Learning • Mar–Apr 2025",
+        title: "Multimodal 7-Class Emotion Recognition System",
+        subtitle: "Cross-Modal Audio, Video & Text Fusion Architecture",
+        diagram: `[Audio Waveform] ──► [Mel-Spectrogram] ──► [ResNet-18 CNN + Attention CRNN] ──┐
+[Video Frames]   ──► [Facial Expression Encoder] ───────────────────────────────┼──► [Calibrated Late Fusion] ──► [7 Emotions]
+[Transcript]     ──► [Text Feature Pipeline] ───────────────────────────────────┘`,
+        bullets: [
+          "Designed a 7-class affective computing system combining acoustic, visual, and textual signals.",
+          "Trained ResNet-18 CNNs on audio spectrograms alongside an attention-equipped CRNN to capture temporal prosody dynamics.",
+          "Benchmarked late-fusion multimodal predictions against Naive Bayes, Random Forest, and Decision Tree baselines with confusion matrix and Sweetviz profiling."
+        ],
+        tags: ["PyTorch", "TensorFlow", "Keras", "ResNet-18", "CRNN", "Scikit-Learn", "Sweetviz", "Python"]
+      },
+      {
+        badge: "Active Build • Production LLMOps Architecture",
+        title: "Self-Corrective Agentic Financial RAG Engine",
+        subtitle: "Stateful LangGraph Workflow + Cross-Encoder Reranking + Automated Ragas Evaluation",
+        diagram: `[User Query] ──► [Redis Semantic Cache (<50ms hit)]
+                      │ (miss)
+                      ▼
+        [Hybrid Retrieval: BM25 + FAISS (RRF Top-50)]
+                      │
+                      ▼
+        [Cross-Encoder Reranker (Top-5) + Logit Threshold Gate]
+                      │ (low confidence & retries < 2 -> Query Rewrite)
+                      ▼
+        [Async FastAPI SSE Stream + Ragas Faithfulness CI/CD Gate]`,
+        bullets: [
+          "Extends thesis claim-verification concepts into multi-hop financial document QA with strict citation grounding.",
+          "Uses two-stage retrieval (Reciprocal Rank Fusion over BM25 + dense vectors followed by Cross-Encoder reranking) and logit-threshold routing to avoid unnecessary LLM grading overhead.",
+          "Includes automated Ragas evaluation gates (Context Precision, Context Recall, Faithfulness) on golden numerical QA datasets."
+        ],
+        tags: ["LangGraph", "FastAPI", "Cross-Encoder", "FAISS", "BM25", "Ragas", "Redis", "Docker"]
+      }
+    ];
+
+    function openProjectModal(index) {
+      const item = projectDetails[index];
+      document.getElementById('modal-badge').textContent = item.badge;
+      document.getElementById('modal-title').textContent = item.title;
+      document.getElementById('modal-subtitle').textContent = item.subtitle;
+      document.getElementById('modal-diagram').textContent = item.diagram;
+
+      const bulletsEl = document.getElementById('modal-bullets');
+      bulletsEl.innerHTML = item.bullets.map(b => `
+        <li class="flex items-start gap-2.5">
+          <span class="text-sky-400 font-mono mt-0.5">&rarr;</span>
+          <span>${b}</span>
+        </li>
+      `).join('');
+
+      const tagsEl = document.getElementById('modal-tags');
+      tagsEl.innerHTML = item.tags.map(t => `
+        <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-white/[0.05] text-slate-300 border border-white/[0.08]">${t}</span>
+      `).join('');
+
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('project-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'project-modal') closeProjectModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProjectModal();
+    });
+
+    // Project Category Filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('bg-sky-500', 'text-slate-950');
+          b.classList.add('bg-white/[0.05]', 'text-slate-300');
+        });
+        btn.classList.remove('bg-white/[0.05]', 'text-slate-300');
+        btn.classList.add('bg-sky-500', 'text-slate-950');
+
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.project-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Clipboard Copy with iFrame-safe fallback
+    function copyText(text, message) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(message);
+      } catch (err) {
+        showToast('Copied: ' + text);
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('hidden');
+      toast.classList.add('flex');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex');
+      }, 2600);
+    }
+
+    // Mobile Menu Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Intersection Observer for Smooth Scroll Reveal & Scroll-Spy
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 140;
+        if (window.scrollY >= top) current = sec.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('text-sky-400', 'bg-white/[0.06]');
+        if (link.dataset.section === current) {
+          link.classList.add('text-sky-400', 'bg-white/[0.06]');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
